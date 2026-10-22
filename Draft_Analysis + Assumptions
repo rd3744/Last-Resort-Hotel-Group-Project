@@ -1,0 +1,39 @@
+https://docs.google.com/document/d/13ZwHD-EgVuzJq4YCGr5_U5yPoQz3DZiylSVU4nvOmjM/edit?usp=sharing
+
+Analysis:
+In the link provided
+
+
+Assumptions:
+
+Eric's Assumptions (Hotel Structure and Rooms):
+Two rooms are considered adjacent only when a door directly connects them. Rooms sharing a common adjacent room are not necessarily adjacent to each other
+A sleeping room either has "minimal amount of extra space" or "an extra large open area". This is expressed with largeExtraSpace as a yes/no status.
+wingID uniquely identifies every wing across all buildings, but wingName does not enforce uniqueness across all buildings.
+This setup supports more than 1 hotel in the system but doesn't require it.
+The roomAdjacency table records connected rooms, including whether they are connected by movable walls. roomID1 and roomID2 are FKs referencing the Room table, which are also a composite PK. Two separate relationship lines connect Room to RoomAdjacency, so each room can connect to zero or multiple other rooms without repeating attributes in the Room table.
+roomType includes pool patios and courtyards since they are treated as meeting rooms if they are used for events.
+It is assumed a room cannot contain both permanent and foldaway beds.
+The roomBed table shows the sizes and quantities of beds in each room, the composite PK allows a room to contain multiple bed sizes without repeating attributes in the Room table.
+
+Ava’s Assumptions (Guests and Reservations)
+Every customer is either a guest or a meeting organizer
+One reservation can be for multiple rooms
+A reservation requires a billing party
+Only available rooms can be assigned
+Sleeping rooms are reserved by date, while meeting rooms are reserved
+by date and usage time/eating usages (e.g. as either breakfast, morning, lunch, afternoon, supper, evening, or night).
+
+Saanit's Assumptions (Events and Facility Usage)
+Every event must have a host, which can be either a registered guest or an organization. A guest or organization may host multiple events.
+A guest can attend multiple events, and an event can have multiple guests. Each guest can have only one attendance record per event.
+An event may reserve multiple meeting rooms, and a meeting room may be booked for different events, provided their scheduled times do not overlap.
+Meeting rooms are scheduled using predefined time slots. Each booking is associated with one time slot, and multiple bookings may use the same time slot on different dates or in different rooms.
+Each access card belongs to one registered guest, but a guest may receive multiple cards over time. Each card has an issue date, expiration date, and status.
+Every recorded room-access attempt is associated with one access card and one room. Multiple access attempts can be recorded for the same card and room.
+
+Roopak Assumptions (Billing and Services)
+Every account can be tied to a person
+One account can belong to at most one org or event
+Charge allocations have to add up to 100%
+A payment can exist without an invoice due to deposits
