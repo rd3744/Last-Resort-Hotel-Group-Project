@@ -16,13 +16,15 @@ roomType includes pool patios and courtyards since they are treated as meeting r
 It is assumed a room cannot contain both permanent and foldaway beds.
 The roomBed table shows the sizes and quantities of beds in each room, the composite PK allows a room to contain multiple bed sizes without repeating attributes in the Room table.
 
-Ava’s Assumptions (Guests and Reservations)
+Ava  Assumptions
 Every customer is either a guest or a meeting organizer
 One reservation can be for multiple rooms
 A reservation requires a billing party
 Only available rooms can be assigned
 Sleeping rooms are reserved by date, while meeting rooms are reserved
 by date and usage time/eating usages (e.g. as either breakfast, morning, lunch, afternoon, supper, evening, or night).
+Customer history is derived from customer, Reservation and Stay using customerID and reservationID.
+No customerHistory text field is stored. actualCheckIn and actualCheckOut record completed or ongoing stays.  Each organization records one primary representative and their contact details.
 
 Saanit's Assumptions (Events and Facility Usage)
 Every event must have a host, which can be either a registered guest or an organization. A guest or organization may host multiple events.
